@@ -40,7 +40,7 @@ ingresar_datos<-function(indicador_archivos,variable){
         myshp@data[variable]<-as.numeric(unlist(c(myshp@data[variable])))
         proj4string(myshp) <- CRS("+init=epsg:4326")
         #reproyecto a metros pseudo mercator
-        myshp <- spTransform(myshp, CRS("+init=epsg:3857"))
+        myshp <- spTransform(myshp, CRS("+init=epsg:32720"))
         #me quedo con la columna de Rinde.
         drops<-c(variable)
         myshp1 <- myshp[,(names(myshp) %in% drops)]
