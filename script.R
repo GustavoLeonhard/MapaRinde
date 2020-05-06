@@ -40,7 +40,7 @@ ingresar_datos<-function(indicador_archivos,variable){
         myshp@data[variable]<-as.numeric(unlist(c(myshp@data[variable])))
         proj4string(myshp) <- CRS("+init=epsg:4326")
         #reproyecto a metros pseudo mercator
-        myshp <- spTransform(myshp, CRS("+init=epsg:32720"))
+        myshp <- spTransform(myshp, CRS("+init=epsg:4326"))
         #me quedo con la columna de Rinde.
         drops<-c(variable)
         myshp1 <- myshp[,(names(myshp) %in% drops)]
@@ -55,7 +55,7 @@ importar_poligono<-function(indicador_archivos){
       ruta_datos<-paste(getwd(),"/",lista1$lista[indicador_archivos],sep="")  
       poligono<-readShapePoly(ruta_datos)
       proj4string(poligono) <- CRS("+init=epsg:4326")
-      poligono <- spTransform(poligono, CRS("+init=epsg:3857"))
+      poligono <- spTransform(poligono, CRS("+init=epsg:4326"))
       grdpts <- makegrid(poligono, cellsize = 2)
       spgrd <- SpatialPoints(grdpts, proj4string = CRS(proj4string(poligono)))
       spgrdWithin <- SpatialPixels(spgrd[poligono,])
